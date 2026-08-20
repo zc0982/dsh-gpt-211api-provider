@@ -1,0 +1,53 @@
+# GPT 211API provider preset for DeepSeek Harness.
+# Later profile/home patches and the llm-pi-ai settings section may override it.
+- id: llm-pi-ai
+  name: '@deepseek-ai/dsh-llm-pi-ai'
+  config:
+    providers:
+      gpt-211api:
+        displayName: GPT 211API
+        apiKeyEnv: GPT_211API_API_KEY
+        api: openai-completions
+        baseURL: https://www.211api.com/v1
+        compat:
+          thinkingFormat: openai
+          supportsReasoningEffort: true
+        models:
+          - id: gpt-5.6-sol
+            name: GPT-5.6 Sol
+            reasoningEfforts:
+              'off': null
+              low: low
+              medium: medium
+              high: high
+              xhigh: xhigh
+              max: max
+          - id: gpt-5.6-terra
+            name: GPT-5.6 Terra
+            reasoningEfforts:
+              'off': null
+              low: low
+              medium: medium
+              high: high
+              xhigh: xhigh
+              max: max
+          - id: gpt-5.6-luna
+            name: GPT-5.6 Luna
+            reasoningEfforts:
+              'off': null
+              low: low
+              medium: medium
+              high: high
+              xhigh: xhigh
+              max: max
+          - id: codex-auto-review
+            name: Codex Auto Review
+          - id: gpt-image-2
+            name: GPT Image 2
+
+- id: agent-default-model
+  name: '@deepseek-ai/dsh-agent-default-model'
+  config:
+    provider: gpt-211api
+    model: gpt-5.6-sol
+    reasoningEffort: high
