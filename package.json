@@ -1,7 +1,7 @@
 {
-  "name": "@zc0982/dsh-gpt-211api-provider",
-  "version": "0.1.0",
-  "description": "GPT 211API provider preset with complete reasoning effort selection for DeepSeek Harness",
+  "name": "@zc0982/dsh-gpt-provider",
+  "version": "0.1.1",
+  "description": "GPT provider preset with complete reasoning effort selection for DeepSeek Harness",
   "type": "module",
   "main": "./lib/index.js",
   "types": "./lib/types/index.d.ts",
@@ -19,10 +19,10 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/zc0982/dsh-gpt-211api-provider.git"
+    "url": "git+https://github.com/zc0982/dsh-gpt-provider.git"
   },
-  "bugs": { "url": "https://github.com/zc0982/dsh-gpt-211api-provider/issues" },
-  "homepage": "https://github.com/zc0982/dsh-gpt-211api-provider#readme",
+  "bugs": { "url": "https://github.com/zc0982/dsh-gpt-provider/issues" },
+  "homepage": "https://github.com/zc0982/dsh-gpt-provider#readme",
   "engines": { "node": "^22.19.0 || >=24.0.0" },
   "scripts": {
     "build": "bash scripts/build.sh"

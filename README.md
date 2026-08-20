@@ -1,4 +1,4 @@
-# DSH GPT 211API Provider
+# DSH GPT Provider
 
 DeepSeek Harness 的 GPT 211API Provider 配置插件，为 GPT-5.6 Sol、Terra、Luna 提供完整的可选思考等级，并显式按 OpenAI-compatible `reasoning_effort` 字段发送选择结果。
 
@@ -22,16 +22,25 @@ DeepSeek Harness 的 GPT 211API Provider 配置插件，为 GPT-5.6 Sol、Terra�
 从 GitHub 安装指定版本：
 
 ```bash
-dsh plugin --profile web add -w github:zc0982/dsh-gpt-211api-provider#v0.1.0
+dsh plugin --profile web add -w github:zc0982/dsh-gpt-provider#v0.1.1
 ```
 
 也可以下载 GitHub Release 中的 `.tgz` 后安装：
 
 ```bash
-dsh plugin --profile web add -w ./zc0982-dsh-gpt-211api-provider-0.1.0.tgz
+dsh plugin --profile web add -w ./zc0982-dsh-gpt-provider-0.1.1.tgz
 ```
 
 安装后必须重启 DSH host，使新的 bundle 层参与配置合成；随后刷新或重新连接 GUI。
+
+### 从旧包名迁移
+
+如果安装过 `@zc0982/dsh-gpt-211api-provider` v0.1.0，请先移除旧包，再安装新包，避免两个 bundle 同时覆盖相同行：
+
+```bash
+dsh plugin --profile web remove -w @zc0982/dsh-gpt-211api-provider
+dsh plugin --profile web add -w github:zc0982/dsh-gpt-provider#v0.1.1
+```
 
 ## 配置凭据
 
@@ -68,7 +77,7 @@ Bundle 层只提供默认配置。用户仍可通过 `$DSH_HOME/settings.yaml` �
 ## 卸载
 
 ```bash
-dsh plugin --profile web remove -w @zc0982/dsh-gpt-211api-provider
+dsh plugin --profile web remove -w @zc0982/dsh-gpt-provider
 ```
 
 ## 开发
