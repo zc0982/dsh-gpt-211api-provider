@@ -35,6 +35,7 @@ const models = llm?.config?.providers?.['gpt-211api']?.models
 if (!Array.isArray(models) || models.length !== 5) throw new Error('provider preset must declare five models')
 const expected = ['off', 'low', 'medium', 'high', 'xhigh', 'max']
 for (const model of models.slice(0, 3)) {
+  if (model.defaultReasoningEffort !== 'high') throw new Error(model.id + ' must default to high reasoning')
   const levels = Object.keys(model.reasoningEfforts ?? {})
   if (JSON.stringify(levels) !== JSON.stringify(expected)) {
     throw new Error(model.id + ' reasoning levels drifted: ' + levels.join(', '))

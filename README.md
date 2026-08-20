@@ -8,12 +8,12 @@ DeepSeek Harness 的 GPT 211API Provider 配置插件，为 GPT-5.6 Sol、Terra�
 - 提供 GPT-5.6 Sol、GPT-5.6 Terra、GPT-5.6 Luna。
 - 每个推理模型提供 `off`、`low`、`medium`、`high`、`xhigh`、`max` 六档选择。
 - 保留 Codex Auto Review 与 GPT Image 2 模型入口。
-- 将新会话默认模型设为 GPT-5.6 Sol，默认思考等级设为 `high`。
+- Sol、Terra、Luna 均默认使用 `high`；新会话默认模型为 GPT-5.6 Sol。
 - 复用 DSH 内置的 `@deepseek-ai/dsh-llm-pi-ai`，不复制协议、凭据或流式处理实现。
 
 ## 要求
 
-- DeepSeek Harness `0.1.0-rc.7` 或更高版本。
+- [`zc0982/deepseek-harness`](https://github.com/zc0982/deepseek-harness) `4edfb32dd3` 或更高版本；该版本提供按模型配置 `defaultReasoningEffort` 的适配。
 - Node.js `^22.19.0` 或 `>=24.0.0`。
 - 一个有效的 211API API Key。
 
