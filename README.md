@@ -8,12 +8,12 @@ DeepSeek Harness 的 GPT 211API Provider 配置插件，为 GPT-5.6 Sol、Terra�
 - 提供 GPT-5.6 Sol、GPT-5.6 Terra、GPT-5.6 Luna。
 - 每个推理模型提供 `off`、`low`、`medium`、`high`、`xhigh`、`max` 六档选择。
 - 保留 Codex Auto Review 与 GPT Image 2 模型入口。
-- Sol、Terra、Luna 均默认使用 `high`；新会话默认模型为 GPT-5.6 Sol。
+- 将新会话默认模型设为 GPT-5.6 Sol；思考等级可在模型选择器中显式选择。
 - 复用 DSH 内置的 `@deepseek-ai/dsh-llm-pi-ai`，不复制协议、凭据或流式处理实现。
 
 ## 要求
 
-- [`zc0982/deepseek-harness`](https://github.com/zc0982/deepseek-harness) `4edfb32dd3` 或更高版本；该版本提供按模型配置 `defaultReasoningEffort` 的适配。
+- DeepSeek Harness `0.1.0-rc.7` 或更高版本。
 - Node.js `^22.19.0` 或 `>=24.0.0`。
 - 一个有效的 211API API Key。
 
@@ -31,7 +31,7 @@ dsh plugin --profile web add -w github:zc0982/dsh-gpt-211api-provider#v0.1.0
 dsh plugin --profile web add -w ./zc0982-dsh-gpt-211api-provider-0.1.0.tgz
 ```
 
-安装后刷新已运行的 GUI，或重新启动 DSH。
+安装后必须重启 DSH host，使新的 bundle 层参与配置合成；随后刷新或重新连接 GUI。
 
 ## 配置凭据
 
@@ -57,6 +57,10 @@ export GPT_211API_API_KEY='your-api-key'
 
 Provider 配置显式设置 `supportsReasoningEffort: true`，避免自定义域名依赖 URL 猜测。
 
+## 已知限制
+
+Codex Auto Review 与 GPT Image 2 是按现有 211API 模型清单保留的 Provider 专用入口；离线验证只覆盖 Sol、Terra、Luna 的聊天补全与六档思考参数。插件不声明 GPT Image 2 具备 DSH 聊天或图片生成能力，实际可用性由 211API 端点决定。
+
 ## 覆盖配置
 
 Bundle 层只提供默认配置。用户仍可通过 `$DSH_HOME/settings.yaml` 中的 `llm-pi-ai` section 或 Web GUI 模型设置覆盖 Provider、模型和端点。DSH 的 profile/home patch 层也可以覆盖本插件写入的 `llm-pi-ai` 与 `agent-default-model` 行。
@@ -68,6 +72,8 @@ dsh plugin --profile web remove -w @zc0982/dsh-gpt-211api-provider
 ```
 
 ## 开发
+
+以下命令在源码 checkout 或包含 `src/`、`scripts/` 与 `tsconfig.json` 的 Release 包中运行：
 
 ```bash
 DSH_CHECKOUT=/path/to/deepseek-harness npm run build

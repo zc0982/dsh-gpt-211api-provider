@@ -35,7 +35,6 @@ const models = llm?.config?.providers?.['gpt-211api']?.models
 if (!Array.isArray(models) || models.length !== 5) throw new Error('provider preset must declare five models')
 const expected = ['off', 'low', 'medium', 'high', 'xhigh', 'max']
 for (const model of models.slice(0, 3)) {
-  if (model.defaultReasoningEffort !== 'high') throw new Error(model.id + ' must default to high reasoning')
   const levels = Object.keys(model.reasoningEfforts ?? {})
   if (JSON.stringify(levels) !== JSON.stringify(expected)) {
     throw new Error(model.id + ' reasoning levels drifted: ' + levels.join(', '))
@@ -43,4 +42,37 @@ for (const model of models.slice(0, 3)) {
 }
 NODE
 
-echo "build: compiled bundle and validated provider preset"
+(
+  cd "$CHECKOUT"
+  node --experimental-strip-types --input-type=module - "$ROOT/cordis.patch.yml" <<'NODE'
+import { readFileSync } from 'node:fs'
+import { createRequire } from 'node:module'
+import { resolveProfiles } from './packages/llm/llm-pi-ai/src/config.ts'
+import { getSupportedThinkingLevels } from './packages/llm/llm-pi-ai/node_modules/@earendil-works/pi-ai/dist/index.js'
+const require = createRequire(import.meta.url)
+const yaml = require('js-yaml')
+const rows = yaml.load(readFileSync(process.argv[2], 'utf8'))
+const providerRow = rows.find(row => row.id === 'llm-pi-ai')
+const profile = resolveProfiles(providerRow.config.providers).get('gpt-211api')
+if (profile === undefined) throw new Error('gpt-211api route did not resolve')
+const expected = ['off', 'low', 'medium', 'high', 'xhigh', 'max']
+for (const model of profile.piProvider.getModels().slice(0, 3)) {
+  const actual = getSupportedThinkingLevels(model)
+  if (JSON.stringify(actual) !== JSON.stringify(expected)) {
+    throw new Error(model.id + ' resolved levels drifted: ' + actual.join(', '))
+  }
+  if (model.compat?.supportsReasoningEffort !== true) {
+    throw new Error(model.id + ' does not force reasoning_effort dispatch')
+  }
+}
+const defaultRow = rows.find(row => row.id === 'agent-default-model')
+const defaultKeys = Object.keys(defaultRow?.config ?? {}).sort()
+if (JSON.stringify(defaultKeys) !== JSON.stringify(['model', 'provider'])) {
+  throw new Error('agent-default-model config has unsupported fields: ' + defaultKeys.join(', '))
+}
+NODE
+
+  node "$ROOT/scripts/verify-wire.mjs" "$CHECKOUT" "$ROOT/cordis.patch.yml"
+)
+
+echo "build: compiled bundle and validated six-level DSH wire dispatch"

@@ -22,7 +22,6 @@
               high: high
               xhigh: xhigh
               max: max
-            defaultReasoningEffort: high
           - id: gpt-5.6-terra
             name: GPT-5.6 Terra
             reasoningEfforts:
@@ -32,7 +31,6 @@
               high: high
               xhigh: xhigh
               max: max
-            defaultReasoningEffort: high
           - id: gpt-5.6-luna
             name: GPT-5.6 Luna
             reasoningEfforts:
@@ -42,7 +40,6 @@
               high: high
               xhigh: xhigh
               max: max
-            defaultReasoningEffort: high
           - id: codex-auto-review
             name: Codex Auto Review
           - id: gpt-image-2
@@ -53,4 +50,3 @@
   config:
     provider: gpt-211api
     model: gpt-5.6-sol
-    reasoningEffort: high

@@ -13,7 +13,7 @@
     "./cordis.patch.yml": "./cordis.patch.yml",
     "./package.json": "./package.json"
   },
-  "files": ["lib", "cordis.patch.yml", "README.md", "LICENSE"],
+  "files": ["lib", "src", "scripts", "tsconfig.json", "cordis.patch.yml", "README.md", "LICENSE"],
   "dsh": { "bundle": { "patch": "./cordis.patch.yml" } },
   "keywords": ["deepseek-harness", "dsh", "gpt", "reasoning-effort", "211api"],
   "license": "MIT",
@@ -24,11 +24,7 @@
   "bugs": { "url": "https://github.com/zc0982/dsh-gpt-211api-provider/issues" },
   "homepage": "https://github.com/zc0982/dsh-gpt-211api-provider#readme",
   "engines": { "node": "^22.19.0 || >=24.0.0" },
-  "devDependencies": {
-    "typescript": "^5.9.0"
-  },
   "scripts": {
-    "build": "bash scripts/build.sh",
-    "typecheck": "tsc -p tsconfig.json --noEmit"
+    "build": "bash scripts/build.sh"
   }
 }
