@@ -22,13 +22,13 @@ DeepSeek Harness 的 GPT 211API Provider 配置插件，为 GPT-5.6 Sol、Terra�
 从 GitHub 安装指定版本：
 
 ```bash
-dsh plugin --profile web add github:zc0982/dsh-gpt-211api-provider#v0.1.0
+dsh plugin --profile web add -w github:zc0982/dsh-gpt-211api-provider#v0.1.0
 ```
 
 也可以下载 GitHub Release 中的 `.tgz` 后安装：
 
 ```bash
-dsh plugin --profile web add ./zc0982-dsh-gpt-211api-provider-0.1.0.tgz
+dsh plugin --profile web add -w ./zc0982-dsh-gpt-211api-provider-0.1.0.tgz
 ```
 
 安装后刷新已运行的 GUI，或重新启动 DSH。
@@ -64,7 +64,7 @@ Bundle 层只提供默认配置。用户仍可通过 `$DSH_HOME/settings.yaml` �
 ## 卸载
 
 ```bash
-dsh plugin --profile web remove @zc0982/dsh-gpt-211api-provider
+dsh plugin --profile web remove -w @zc0982/dsh-gpt-211api-provider
 ```
 
 ## 开发
